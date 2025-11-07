@@ -273,7 +273,7 @@ export const ThemeUtils = {
   /**
    * 获取当前主题颜色
    */
-  getColor(colorName: keyof typeof Colors): string {
+  getColor(colorName: keyof typeof Colors): string | { colors: Array<{ color: string; offset: number }>; direction: GradientDirection } {
     return Colors[colorName];
   },
 

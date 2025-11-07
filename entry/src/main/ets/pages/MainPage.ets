@@ -60,8 +60,8 @@ struct MainPage {
       const videos = await DataService.getVideosByTab(this.currentTab);
       appStore.setVideos(videos);
       this.videos = videos;
-    } catch (error: Error) {
-      console.error('Failed to load videos:', error.message);
+    } catch (error) {
+      console.error('Failed to load videos:', error);
     } finally {
       this.isLoading = false;
     }
@@ -74,7 +74,7 @@ struct MainPage {
     if (tab === this.currentTab) return;
 
     this.currentTab = tab;
-    appStore.setActiveTopTab(tab as any);
+    appStore.setActiveTopTab(tab as '推荐' | '关注' | '商城' | '团购');
 
     // 重新加载对应标签的视频
     await this.initializeData();
@@ -156,7 +156,7 @@ struct MainPage {
       // 底部导航栏
       BottomNavBar({
         activeTab: appStore.state.activeBottomTab,
-        onTabChange: (tab: string) => appStore.setActiveBottomTab(tab as any),
+        onTabChange: (tab: string) => appStore.setActiveBottomTab(tab as 'home' | 'friends' | 'create' | 'messages' | 'profile'),
         onFriendsClick: () => this.toggleFriendsDrawer(),
         onCreateClick: () => this.toggleCreateMenu()
       })

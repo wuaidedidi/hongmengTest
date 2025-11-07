@@ -237,7 +237,7 @@ export struct BottomNavBar {
  */
 @Component
 export struct FrostedGlassContainer {
-  @BuilderParam content: () => void = () => {};
+  @BuilderParam content: () => void;
 
   build() {
     Stack() {

@@ -173,7 +173,7 @@ export struct FriendsDrawer {
   @Builder
   FriendsList() {
     List({ space: 0 }) {
-      ForEach(this.friends, (friend: any) => {
+      ForEach(this.friends, (friend: FriendItemParams) => {
         ListItem() {
           this.FriendItem(friend)
         }

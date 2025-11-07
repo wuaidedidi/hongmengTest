@@ -30,6 +30,14 @@ interface FriendItemParams {
   status?: string;
 }
 
+interface FloatingHeart {
+  id: string;
+  x: number;
+  y: number;
+  opacity: number;
+  scale: number;
+}
+
 interface VideoCardProps {
   video: VideoItem;
   isActive: boolean;
@@ -51,14 +59,14 @@ export struct VideoCard {
   @Prop onVideoEnd: () => void = () => {};
   @Prop onSwipeUp: () => void = () => {};
   @Prop onSwipeDown: () => void = () => {};
-  @Prop onDoubleTap: (position?: { x: number; y: number }) => void = () => {};
-  @Prop onLongPress: (position?: { x: number; y: number }) => void = () => {};
+  @Prop onDoubleTap: (position?: Position) => void = () => {};
+  @Prop onLongPress: (position?: Position) => void = () => {};
 
   @State isPlaying: boolean = true;
   @State isMuted: boolean = true;
   @State showControls: boolean = false;
   @State progress: number = 0;
-  @State floatingHearts: Array<{ id: string; x: number; y: number; opacity: number; scale: number }> = [];
+  @State floatingHearts: FloatingHeart[] = [];
 
   private videoController: VideoController = new VideoController();
 
@@ -126,12 +134,28 @@ export struct VideoCard {
    * 创建爱心飘散效果
    */
   private createFloatingHearts(x: number, y: number): void {
-    const hearts = heartFloatAnimation.createHearts(x, y, 6);
-    this.floatingHearts = [...this.floatingHearts, ...hearts];
+    const newHearts: FloatingHeart[] = [];
+
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI * 2 * i) / 6;
+      const velocity = 2 + Math.random() * 2;
+
+      const heart: FloatingHeart = {
+        id: `heart_${Date.now()}_${i}`,
+        x: x,
+        y: y,
+        opacity: 1,
+        scale: 0.5 + Math.random() * 0.5
+      };
+
+      newHearts.push(heart);
+    }
+
+    this.floatingHearts = [...this.floatingHearts, ...newHearts];
 
     // 3秒后清除爱心
     setTimeout(() => {
-      this.floatingHearts = this.floatingHearts.filter(h => !hearts.includes(h));
+      this.floatingHearts = this.floatingHearts.filter(h => !newHearts.includes(h));
     }, 1000);
   }
 
@@ -179,7 +203,7 @@ export struct VideoCard {
       }
 
       // 浮动爱心
-      ForEach(this.floatingHearts, (heart: any) => {
+      ForEach(this.floatingHearts, (heart: FloatingHeart) => {
         this.FloatingHeart(heart)
       })
     }
