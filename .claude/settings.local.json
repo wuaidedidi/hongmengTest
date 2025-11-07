@@ -5,7 +5,10 @@
       "Bash(hvigorw assembleApp:*)",
       "Bash(./hvigor/hvigor-wrapper.js:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
