@@ -7,6 +7,7 @@ import { CreateMenu } from '../components/CreateMenu';
 import { DataService } from '../services/mockData';
 import { LayoutHelper } from '../utils/layout';
 import { Colors } from '../styles/theme';
+import { VideoItem } from '../models/types';
 
 /**
  * 主页面 - 抖音风格的短视频应用
@@ -17,7 +18,7 @@ import { Colors } from '../styles/theme';
 @Component
 struct MainPage {
   @State currentTab: string = '推荐';
-  @State videos: any[] = [];
+  @State videos: VideoItem[] = [];
   @State isLoading: boolean = true;
   @State currentVideoIndex: number = 0;
   @State isFriendsDrawerOpen: boolean = false;
@@ -228,7 +229,7 @@ struct MainPage {
   @Builder
   VideoPlayerView() {
     Swiper(this.swiperController) {
-      ForEach(this.videos, (video: any, index: number) => {
+      ForEach(this.videos, (video: VideoItem, index: number) => {
         VideoCard({
           video: video,
           isActive: index === this.currentVideoIndex,

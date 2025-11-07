@@ -44,24 +44,24 @@ export const Colors = {
   // 渐变色配置
   gradientBlack: {
     colors: [
-      { color: 'rgba(0,0,0,0)', offset: 0 },
-      { color: 'rgba(0,0,0,0.8)', offset: 1 }
+      { color: '#00000000', offset: 0 },
+      { color: '#CC000000', offset: 1 }
     ],
-    direction: 'bottom'
+    direction: GradientDirection.Bottom
   },
   gradientPrimary: {
     colors: [
       { color: '#FE2C55', offset: 0 },
       { color: '#FF0050', offset: 1 }
     ],
-    direction: 'right'
+    direction: GradientDirection.Right
   },
   gradientSecondary: {
     colors: [
       { color: '#25F4EE', offset: 0 },
       { color: '#00D4E4', offset: 1 }
     ],
-    direction: 'right'
+    direction: GradientDirection.Right
   }
 };
 
@@ -222,7 +222,17 @@ export const ComponentSizes = {
   videoAction: {
     buttonSize: 48,
     spacing: 16,
-    avatarSize: 48
+    avatarSize: 48,
+    rightWidth: 60
+  },
+
+  // 圆角尺寸
+  borderRadius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 16,
+    full: 999
   }
 };
 

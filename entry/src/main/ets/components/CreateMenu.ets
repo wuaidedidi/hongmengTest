@@ -107,8 +107,7 @@ export struct CreateMenu {
         .padding({ top: Spacing.xl, bottom: Spacing.xxl })
         .border({
           width: { top: 0.5 },
-          color: Colors.borderLight,
-          opacity: 0.3
+          color: Colors.borderLight
         })
         .animation({
           duration: 220,

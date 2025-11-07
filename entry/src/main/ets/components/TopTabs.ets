@@ -76,8 +76,7 @@ export struct TopTabs {
     .zIndex(30) // 确保在其他内容之上
     .border({
       width: { bottom: 0.5 },
-      color: Colors.border,
-      opacity: 0.3
+      color: Colors.border
     })
   }
 

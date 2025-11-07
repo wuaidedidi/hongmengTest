@@ -80,8 +80,7 @@ export struct BottomNavBar {
     .alignItems(VerticalAlign.Bottom)
     .border({
       width: { top: 0.5 },
-      color: Colors.borderLight,
-      opacity: 0.3
+      color: Colors.borderLight
     })
     .padding({ bottom: LayoutHelper.getIndicatorHeight() })
     .zIndex(30)
@@ -141,7 +140,7 @@ export struct BottomNavBar {
           this.createClickAnimation();
         })
     )
-    .padding({ vertical: Spacing.xs })
+    .padding({ top: Spacing.xs, bottom: Spacing.xs })
   }
 
   /**
@@ -240,8 +239,7 @@ export struct FrostedGlassContainer {
         .backdropBlur(12)
         .border({
           width: { top: 0.5 },
-          color: Colors.borderLight,
-          opacity: 0.3
+          color: Colors.borderLight
         })
 
       // 内容

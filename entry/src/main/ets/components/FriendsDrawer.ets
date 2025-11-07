@@ -15,7 +15,7 @@ interface FriendsDrawerProps {
 export struct FriendsDrawer {
   @Prop onClose: () => void = () => {};
 
-  @State friends: any[] = [];
+  @State friends: Array<{ id: string; name: string; avatar: string; isOnline: boolean; lastSeen?: string; status?: string }> = [];
   @State isLoading: boolean = true;
 
   aboutToAppear(): void {
@@ -73,8 +73,7 @@ export struct FriendsDrawer {
         .backdropBlur(12)
         .border({
           width: { left: 0.5 },
-          color: Colors.borderLight,
-          opacity: 0.3
+          color: Colors.borderLight
         })
         .animation({
           duration: 220,
@@ -112,8 +111,7 @@ export struct FriendsDrawer {
     .padding(Spacing.md)
     .border({
       width: { bottom: 0.5 },
-      color: Colors.borderLight,
-      opacity: 0.3
+      color: Colors.borderLight
     })
   }
 
@@ -186,7 +184,7 @@ export struct FriendsDrawer {
    * 好友项
    */
   @Builder
-  FriendItem(friend: any) {
+  FriendItem(friend: { id: string; name: string; avatar: string; isOnline: boolean; lastSeen?: string; status?: string }) {
     Row() {
       // 头像
       Stack() {

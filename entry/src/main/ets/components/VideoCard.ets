@@ -2,6 +2,7 @@ import { Colors, Typography, Spacing, ComponentSizes } from '../styles/theme';
 import { LayoutHelper } from '../utils/layout';
 import { AnimationHelper, heartFloatAnimation, ANIMATION_CONFIG } from '../utils/anim';
 import { appStore } from '../store/appStore';
+import { VideoItem } from '../models/types';
 
 /**
  * 视频卡片组件
@@ -9,7 +10,7 @@ import { appStore } from '../store/appStore';
  */
 
 interface VideoCardProps {
-  video: any;
+  video: VideoItem;
   isActive: boolean;
   onLike: () => void;
   onFollow: () => void;
@@ -22,7 +23,7 @@ interface VideoCardProps {
 
 @Component
 export struct VideoCard {
-  @Prop video: any;
+  @Prop video: VideoItem;
   @Prop isActive: boolean = false;
   @Prop onLike: () => void = () => {};
   @Prop onFollow: () => void = () => {};
@@ -36,7 +37,7 @@ export struct VideoCard {
   @State isMuted: boolean = true;
   @State showControls: boolean = false;
   @State progress: number = 0;
-  @State floatingHearts: Array<any> = [];
+  @State floatingHearts: Array<{ id: string; x: number; y: number; opacity: number; scale: number }> = [];
 
   private videoController: VideoController = new VideoController();
 
@@ -82,7 +83,6 @@ export struct VideoCard {
    */
   private toggleMuteState(): void {
     this.isMuted = !this.isMuted;
-    this.videoController.mute(this.isMuted);
   }
 
   /**
@@ -201,15 +201,16 @@ export struct VideoCard {
       Row() {
         Column() {
           Blank()
-          LinearGradient({
-            colors: [
-              [Color.Transparent, 0],
-              [Color.Black, 0.8]
-            ],
-            direction: GradientDirection.Bottom
-          })
+          Column()
             .width('100%')
             .height(200)
+            .linearGradient({
+              colors: [
+                ['#00000000', 0.0],
+                ['#CC000000', 0.8]
+              ],
+              direction: GradientDirection.Bottom
+            })
         }
       }
     }
@@ -454,7 +455,7 @@ export struct VideoCard {
    * 飘动的爱心
    */
   @Builder
-  FloatingHeart(heart: any) {
+  FloatingHeart(heart: { id: string; x: number; y: number; opacity: number; scale: number }) {
     Text('❤️')
       .fontSize(20 + heart.scale * 10)
       .fontColor(Colors.primary)
