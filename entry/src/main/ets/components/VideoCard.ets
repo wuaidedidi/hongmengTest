@@ -494,7 +494,7 @@ export struct VideoCard {
    * 飘动的爱心
    */
   @Builder
-  FloatingHeart(heart: { id: string; x: number; y: number; opacity: number; scale: number }) {
+  FloatingHeart(heart: FloatingHeart) {
     Text('❤️')
       .fontSize(20 + heart.scale * 10)
       .fontColor(Colors.primary)
