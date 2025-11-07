@@ -242,8 +242,7 @@ export const FrostedGlassStyle = {
   backdropBlur: 12,
   border: {
     width: 1,
-    color: Colors.borderLight,
-    opacity: 0.2
+    color: Colors.borderLight
   }
 };
 
@@ -330,8 +329,7 @@ export const ThemeUtils = {
       backdropBlur: blurRadius,
       border: {
         width: 1,
-        color: Colors.borderLight,
-        opacity: 0.2
+        color: Colors.borderLight
       }
     };
   }

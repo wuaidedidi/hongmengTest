@@ -14,6 +14,23 @@ interface BottomNavBarProps {
   onCreateClick: () => void;
 }
 
+interface NavItemParams {
+  icon: string;
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+  showBadge?: boolean;
+  badgeCount?: number;
+}
+
+interface BadgeParams {
+  count: number;
+}
+
+interface FrostedGlassContainerParams {
+  content: () => void;
+}
+
 @Component
 export struct BottomNavBar {
   @Prop activeTab: string = 'home';
@@ -90,14 +107,7 @@ export struct BottomNavBar {
    * 导航项组件
    */
   @Builder
-  NavItem(params: {
-    icon: string;
-    label: string;
-    isActive: boolean;
-    onClick: () => void;
-    showBadge?: boolean;
-    badgeCount?: number;
-  }) {
+  NavItem(params: NavItemParams) {
     Column() {
       Stack() {
         // 图标
@@ -183,7 +193,7 @@ export struct BottomNavBar {
    * 徽章组件
    */
   @Builder
-  Badge(params: { count: number }) {
+  Badge(params: BadgeParams) {
     if (params.count <= 99) {
       Text(params.count.toString())
         .fontSize(10)
@@ -227,7 +237,7 @@ export struct BottomNavBar {
  */
 @Component
 export struct FrostedGlassContainer {
-  @BuilderParam content: () => void;
+  @BuilderParam content: () => void = () => {};
 
   build() {
     Stack() {

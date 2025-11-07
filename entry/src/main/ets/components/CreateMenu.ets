@@ -10,6 +10,14 @@ interface CreateMenuProps {
   onClose: () => void;
 }
 
+interface CreateOptionParams {
+  icon: string;
+  title: string;
+  description: string;
+  color: string;
+  onClick: () => void;
+}
+
 @Component
 export struct CreateMenu {
   @Prop onClose: () => void = () => {};
@@ -124,13 +132,7 @@ export struct CreateMenu {
    * 创建选项
    */
   @Builder
-  CreateOption(params: {
-    icon: string;
-    title: string;
-    description: string;
-    color: string;
-    onClick: () => void;
-  }) {
+  CreateOption(params: CreateOptionParams) {
     Row() {
       // 图标
       Stack() {

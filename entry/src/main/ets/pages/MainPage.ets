@@ -60,8 +60,8 @@ struct MainPage {
       const videos = await DataService.getVideosByTab(this.currentTab);
       appStore.setVideos(videos);
       this.videos = videos;
-    } catch (error) {
-      console.error('Failed to load videos:', error);
+    } catch (error: Error) {
+      console.error('Failed to load videos:', error.message);
     } finally {
       this.isLoading = false;
     }
@@ -247,7 +247,7 @@ struct MainPage {
             // 双击点赞
             appStore.toggleLike(video.id);
           },
-          onLongPress: () => {
+          onLongPress: (position) => {
             // 长按暂停/播放
             appStore.togglePlayState();
           }

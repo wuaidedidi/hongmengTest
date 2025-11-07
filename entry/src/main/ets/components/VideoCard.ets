@@ -9,6 +9,27 @@ import { VideoItem } from '../models/types';
  * 包含视频播放、信息展示、交互操作等
  */
 
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface ActionButtonParams {
+  icon: string;
+  count: string;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+interface FriendItemParams {
+  id: string;
+  name: string;
+  avatar: string;
+  isOnline: boolean;
+  lastSeen?: string;
+  status?: string;
+}
+
 interface VideoCardProps {
   video: VideoItem;
   isActive: boolean;
@@ -17,8 +38,8 @@ interface VideoCardProps {
   onVideoEnd: () => void;
   onSwipeUp: () => void;
   onSwipeDown: () => void;
-  onDoubleTap: (position?: { x: number; y: number }) => void;
-  onLongPress: (position?: { x: number; y: number }) => void;
+  onDoubleTap: (position?: Position) => void;
+  onLongPress: (position?: Position) => void;
 }
 
 @Component
@@ -358,12 +379,7 @@ export struct VideoCard {
    * 操作按钮
    */
   @Builder
-  ActionButton(params: {
-    icon: string;
-    count: string;
-    isActive: boolean;
-    onClick: () => void;
-  }) {
+  ActionButton(params: ActionButtonParams) {
     Column({ space: Spacing.xs }) {
       Text(params.icon)
         .fontSize(32)
@@ -447,8 +463,7 @@ export struct VideoCard {
         .fontSize(24)
         .fontColor(Colors.textPrimary)
     }
-    .justifyContent(FlexAlign.Center)
-    .alignItems(VerticalAlign.Center)
+    .alignContent(Alignment.Center)
   }
 
   /**

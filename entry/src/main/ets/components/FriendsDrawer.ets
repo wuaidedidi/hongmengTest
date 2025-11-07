@@ -11,11 +11,20 @@ interface FriendsDrawerProps {
   onClose: () => void;
 }
 
+interface FriendItemParams {
+  id: string;
+  name: string;
+  avatar: string;
+  isOnline: boolean;
+  lastSeen?: string;
+  status?: string;
+}
+
 @Component
 export struct FriendsDrawer {
   @Prop onClose: () => void = () => {};
 
-  @State friends: Array<{ id: string; name: string; avatar: string; isOnline: boolean; lastSeen?: string; status?: string }> = [];
+  @State friends: FriendItemParams[] = [];
   @State isLoading: boolean = true;
 
   aboutToAppear(): void {
@@ -184,7 +193,7 @@ export struct FriendsDrawer {
    * 好友项
    */
   @Builder
-  FriendItem(friend: { id: string; name: string; avatar: string; isOnline: boolean; lastSeen?: string; status?: string }) {
+  FriendItem(friend: FriendItemParams) {
     Row() {
       // 头像
       Stack() {
